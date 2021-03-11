@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="userDao" class="com.dao.impl.UserDaoImpl" init-method="init" destroy-method="destory"></bean>-->
+
+    <!--静态工厂-->
+    <!--<bean id="userDao" class="com.factory.StaticFactory" factory-method="getUserDao" ></bean>-->
+
+
+    <!--工厂实例-->
+    <!--<bean id="factory" class="com.factory.DynamicFactory"  ></bean>-->
+    <!--<bean id="userDao" factory-bean="factory" factory-method="getUserDao"></bean>-->
+
+    <!--依赖出入-->
+    <!--<bean id="userDao" class="com.dao.impl.UserDaoImpl"  ></bean>-->
+    <!--<bean id="userService" class="com.service.impl.UserServiceImpl"  ></bean>-->
+
+    <!--set依赖注入-->
+    <!--<bean id="userDao" class="com.dao.impl.UserDaoImpl"  ></bean>-->
+    <!--name是UserServiceImpl属性名;ref引入是容器中bean的id-->
+    <!--<bean id="userService" class="com.service.impl.UserServiceImpl"  >-->
+    <!--<property name="userDao" ref="userDao">-->
+
+    <!--</property>-->
+    <!--</bean>-->
+
+    <!--set依赖注入p空间-->
+    <!--<bean id="userDao" class="com.dao.impl.UserDaoImpl"  ></bean>-->
+    <!--<bean id="userService" class="com.service.impl.UserServiceImpl" p:userDao-ref="userDao"></bean>-->
+
+    <!--构造方法注入-->
+    <!--<bean id="userDao" class="com.dao.impl.UserDaoImpl"  ></bean>-->
+    <!--&lt;!&ndash;name是UserServiceImpl构造方法参数名;ref引入是容器中bean的id&ndash;&gt;-->
+    <!--<bean id="userService" class="com.service.impl.UserServiceImpl">-->
+    <!--<constructor-arg name="userDao" ref="userDao"></constructor-arg>-->
+    <!--</bean>-->
+
+    <!--注入普通数据-->
+    <!--构造方法注入-->
+    <!--<bean id="userDao" class="com.dao.impl.UserDaoImpl">-->
+    <!--<property name="username" value="张三"></property>-->
+    <!--<property name="age" value="23"></property>-->
+    <!--</bean>-->
+
+    <!--name是UserServiceImpl属性名;ref引入是容器中bean的id-->
+    <!--<bean id="userService" class="com.service.impl.UserServiceImpl">-->
+    <!--<constructor-arg name="userDao" ref="userDao"></constructor-arg>-->
+    <!--</bean>-->
+
+    <!--注入集合数据-->
+    <!--构造方法注入-->
+    <bean id="userDao" class="com.dao.impl.UserDaoImpl">
+        <!--list集合-->
+        <property name="strList">
+            <list>
+                <value>aaa</value>
+                <value>bbb</value>
+                <value>ccc</value>
+            </list>
+        </property>
+
+        <!--map集合-->
+        <property name="userMap">
+            <map>
+                <!--value-ref引用,必须是容器中存在的-->
+                <entry key="u1" value-ref="user1"></entry>
+                <entry key="u2" value-ref="user2"></entry>
+            </map>
+        </property>
+
+        <!--properties-->
+        <property name="properties">
+            <props>
+                <prop key="a3">aaa</prop>
+                <prop key="b3">bbb</prop>
+                <prop key="c3">ccc</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <!--name是UserServiceImpl属性名;ref引入是容器中bean的id-->
+    <bean id="userService" class="com.service.impl.UserServiceImpl">
+        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+    </bean>
+
+    <!--用户引用-->
+    <bean id="user1" class="com.domain.User">
+        <property name="name" value="张三"></property>
+        <property name="addr" value="北京"></property>
+    </bean>
+    <bean id="user2" class="com.domain.User">
+        <property name="name" value="李四"></property>
+        <property name="addr" value="上海"></property>
+    </bean>
+
+    <import resource="applicationContext-user.xml"></import>
+    <import resource="applicationContext-product.xml"></import>
+
+
+</beans>
