@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="spring_exception:war exploded">
+    <output-path>$PROJECT_DIR$/spring_ioc/artifacts/spring_exception_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="spring_exception" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="spring_exception/web/Web" />
+    </root>
+  </artifact>
+</component>
